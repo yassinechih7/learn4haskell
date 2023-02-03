@@ -523,7 +523,7 @@ branches because it is an expression and it must always return some value.
   satisfying the check will be returned and, therefore, evaluated.
 -}
 closestToZero :: Int -> Int -> Int
-closestToZero x y = error "closestToZero: not implemented!"
+closestToZero x y = if x >= 0 && y >= 0 then min x y else if (0 - x) > (0 - y) then y else x
 
 
 {- |
@@ -557,7 +557,11 @@ value after "=" where the condition is true.
 Casual reminder about adding top-level type signatures for all functions :)
 -}
 
-mid x y z = error "mid: not implemented!"
+mid x y z = Int -> Int -> Int -> Int
+mid x y z
+    | y > x && x > z = x
+    | x > y && y > z = y
+    | otherwise = z
 
 {- |
 =⚔️= Task 8
@@ -571,8 +575,8 @@ True
 >>> isVowel 'x'
 False
 -}
-isVowel c = error "isVowel: not implemented!"
-
+isVowel :: Char -> Char
+isVowel c = elem c ['a', 'e', 'i', 'o', 'u']
 
 {- |
 == Local variables and functions
@@ -656,8 +660,10 @@ You need to use recursion in this task. Feel free to return to it later, if you
 aren't ready for this boss yet!
 -}
 
-firstDigit n = error "firstDigit: Not implemented!"
-
+firstDigit :: Int -> Int 
+firstDigit n
+    | n < 10 = n
+    | otherwise = firstDigit (div n 10)
 
 {-
 You did it! Now it is time to open a pull request with your changes
